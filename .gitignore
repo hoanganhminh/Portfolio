@@ -1,0 +1,41 @@
+# Các file và thư mục hệ thống
+.DS_Store
+Thumbs.db
+
+# Các thư mục và file của môi trường phát triển
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+
+# Các file build và distribution
+dist/
+build/
+
+# Các file log
+*.log
+
+# Các file tạm thời
+*.tmp
+*.swp
+*~
+
+# Các file cấu hình IDE và editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Các file cấu hình cá nhân
+*.local
+
+# Các file cache
+.cache/
+
+# Các file backup
+*.bak
+
+# Các file và thư mục cụ thể cho dự án web
+# (Thêm hoặc xóa các dòng dưới đây tùy theo nhu cầu của dự án)
+# /public/uploads/
+# /config/local.js
