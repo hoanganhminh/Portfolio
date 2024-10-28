@@ -180,26 +180,27 @@
 	};
 
 	var navigationSection = function() {
-
 		var $section = $('section[data-section]');
 		
 		$section.waypoint(function(direction) {
-		  	
-		  	if (direction === 'down') {
-		    	navActive($(this.element).data('section'));
-		  	}
+			if (direction === 'down') {
+				navActive($(this.element).data('section'));
+			}
 		}, {
-	  		offset: '150px'
+			// Giảm offset xuống để trigger sớm hơn
+			offset: '50%'  // Thay đổi từ 150px xuống 50%
 		});
 
 		$section.waypoint(function(direction) {
-		  	if (direction === 'up') {
-		    	navActive($(this.element).data('section'));
-		  	}
+			if (direction === 'up') {
+				navActive($(this.element).data('section'));
+			}
 		}, {
-		  	offset: function() { return -$(this.element).height() + 155; }
+			offset: function() { 
+				// Điều chỉnh offset cho hướng up
+				return -$(this.element).height() + $(window).height() * 0.5;
+			}
 		});
-
 	};
 
 
