@@ -82,12 +82,6 @@ This project is open source and available under the [MIT License](LICENSE).
 - Icons: [Simple Icons](https://simpleicons.org/)
 - Fonts: [Google Fonts](https://fonts.google.com/)
 
-## Contact
-
-Hoang Anh Minh
-- Email: [Your Email]
-- LinkedIn: [hoanganhminh](https://linkedin.com/in/hoanganhminh/)
-
 ---
 
-⭐️ From [hoanganhminh](https://github.com/yourusername)
+⭐️ From [hoanganhminh](https://github.com/hoanganhminh)
