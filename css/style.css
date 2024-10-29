@@ -186,33 +186,75 @@ figure {
             -o-transform: scaleX(1);
             transform: scaleX(1); }
   #colorlib-aside .colorlib-footer {
-    font-size: 15px;
-    text-align: center;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    width: 100%;
     padding: 0 20px;
-    width: 100%; }
-    @media screen and (max-width: 768px) {
-      #colorlib-aside .colorlib-footer {
-        position: relative;
-        bottom: 0; } }
-    #colorlib-aside .colorlib-footer span {
-      display: block; }
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
     #colorlib-aside .colorlib-footer ul {
       padding: 0;
-      margin: 0; }
-      #colorlib-aside .colorlib-footer ul li {
-        padding: 0;
-        margin: 0;
-        display: inline;
-        list-style: none; }
-        #colorlib-aside .colorlib-footer ul li a {
-          color: rgba(255, 255, 255, 0.3);
-          padding: 4px; }
-          #colorlib-aside .colorlib-footer ul li a:hover, #colorlib-aside .colorlib-footer ul li a:active, #colorlib-aside .colorlib-footer ul li a:focus {
-            text-decoration: none;
-            outline: none;
-            color: #2c98f0; }
+      margin: 0;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    #colorlib-aside .colorlib-footer ul li {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    #colorlib-aside .colorlib-footer ul li a {
+      display: inline-block;
+      padding: 8px;
+      background: #f2f3f7;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    #colorlib-aside .colorlib-footer ul li a:hover {
+      transform: translateY(-3px);
+      background: #e6e7eb;
+    }
+    #colorlib-aside .colorlib-footer ul li a img {
+      width: 20px;
+      height: 20px;
+      filter: invert(50%);
+    }
+    #colorlib-aside .colorlib-footer ul li a[title="LinkedIn"]:hover img {
+      filter: invert(30%) sepia(58%) saturate(7482%) hue-rotate(188deg) brightness(94%) contrast(103%); /* LinkedIn Blue */
+    }
+    #colorlib-aside .colorlib-footer ul li a[title="HackerRank"]:hover img {
+      filter: invert(59%) sepia(82%) saturate(434%) hue-rotate(93deg) brightness(96%) contrast(87%); /* HackerRank Green */
+    }
+    #colorlib-aside .colorlib-footer ul li a[title="YouTube"]:hover img {
+      filter: invert(21%) sepia(100%) saturate(7414%) hue-rotate(357deg) brightness(97%) contrast(115%); /* YouTube Red */
+    }
+    #colorlib-aside .colorlib-footer ul li a[title="LeetCode"]:hover img {
+      filter: invert(62%) sepia(98%) saturate(1270%) hue-rotate(360deg) brightness(103%) contrast(104%); /* LeetCode Orange */
+    }
+    #colorlib-aside .colorlib-footer ul li a[title="Coursera"]:hover img {
+      filter: invert(24%) sepia(97%) saturate(1924%) hue-rotate(199deg) brightness(96%) contrast(101%); /* Coursera Blue */
+    }
+    #colorlib-aside .colorlib-footer ul li a[title="Credly"]:hover img {
+      filter: invert(48%) sepia(68%) saturate(2645%) hue-rotate(346deg) brightness(102%) contrast(104%); /* Credly Orange */
+    }
+    #colorlib-aside .colorlib-footer ul li a[title="GitHub"]:hover img {
+      filter: invert(24%) sepia(9%) saturate(629%) hue-rotate(179deg) brightness(92%) contrast(88%); /* GitHub Dark */
+    }
+    #colorlib-aside .colorlib-footer ul li a[title="Facebook"]:hover img {
+      filter: invert(23%) sepia(95%) saturate(1728%) hue-rotate(204deg) brightness(96%) contrast(95%); /* Facebook Blue */
+    }
+    #colorlib-aside .colorlib-footer ul li a[title="Instagram"]:hover img {
+      filter: invert(28%) sepia(100%) saturate(1920%) hue-rotate(299deg) brightness(91%) contrast(97%); /* Instagram Purple */
+    }
 
 .container-wrap {
   max-width: 1170px;
@@ -1426,3 +1468,20 @@ body.offcanvas {
 
 .js .animate-box {
   opacity: 0; }
+      padding-bottom: 1em; } }
+
+.row-bottom-padded-sm {
+  padding-bottom: 1em; }
+  @media screen and (max-width: 768px) {
+    .row-bottom-padded-sm {
+      padding-bottom: 1em; } }
+
+.row-pt-md {
+  padding-top: 3em; }
+
+.col-padding {
+  padding: 10px !important; }
+
+.js .animate-box {
+  opacity: 0; }
+
