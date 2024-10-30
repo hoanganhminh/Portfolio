@@ -39,7 +39,7 @@ A clean, beautiful and responsive portfolio website built using HTML, CSS, and J
 ## Social Links
 
 - [LinkedIn](https://linkedin.com/in/hoanganhminh/)
-- [GitHub](https://github.com/YourGitHub)
+- [GitHub](https://github.com/hoanganhminh)
 - [HackerRank](https://www.hackerrank.com/hoanganhminh1201)
 - [Credly](https://www.credly.com/users/hoanganhminh)
 - [YouTube](https://youtube.com/c/@TheBattleCatsVietNam)
@@ -71,10 +71,6 @@ A clean, beautiful and responsive portfolio website built using HTML, CSS, and J
 ## Contributing
 
 Feel free to fork this repository and submit pull requests for any improvements.
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ## Credits
 
