@@ -107,6 +107,7 @@ figure figcaption {
   padding-bottom: 40px;
   float: left;
   width: 300px;
+  height: 100vh;
   position: fixed;
   z-index: 1001;
   background: #f2f3f7;
@@ -249,6 +250,100 @@ figure figcaption {
   -ms-transform: scaleX(1);
   -o-transform: scaleX(1);
   transform: scaleX(1);
+}
+
+#colorlib-aside .colorlib-footer {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 0 20px;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+#colorlib-aside .colorlib-footer ul {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+#colorlib-aside .colorlib-footer ul li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+#colorlib-aside .colorlib-footer ul li a {
+  display: inline-block;
+  padding: 8px;
+  background: #f2f3f7;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+#colorlib-aside .colorlib-footer ul li a:hover {
+  transform: translateY(-3px);
+  background: #e6e7eb;
+}
+
+#colorlib-aside .colorlib-footer ul li a img {
+  width: 20px;
+  height: 20px;
+  filter: invert(50%);
+}
+
+#colorlib-aside .colorlib-footer ul li a[title="LinkedIn"]:hover img {
+  filter: invert(30%) sepia(58%) saturate(7482%) hue-rotate(188deg) brightness(94%) contrast(103%);
+  /* LinkedIn Blue */
+}
+
+#colorlib-aside .colorlib-footer ul li a[title="HackerRank"]:hover img {
+  filter: invert(59%) sepia(82%) saturate(434%) hue-rotate(93deg) brightness(96%) contrast(87%);
+  /* HackerRank Green */
+}
+
+#colorlib-aside .colorlib-footer ul li a[title="YouTube"]:hover img {
+  filter: invert(21%) sepia(100%) saturate(7414%) hue-rotate(357deg) brightness(97%) contrast(115%);
+  /* YouTube Red */
+}
+
+#colorlib-aside .colorlib-footer ul li a[title="LeetCode"]:hover img {
+  filter: invert(62%) sepia(98%) saturate(1270%) hue-rotate(360deg) brightness(103%) contrast(104%);
+  /* LeetCode Orange */
+}
+
+#colorlib-aside .colorlib-footer ul li a[title="Coursera"]:hover img {
+  filter: invert(24%) sepia(97%) saturate(1924%) hue-rotate(199deg) brightness(96%) contrast(101%);
+  /* Coursera Blue */
+}
+
+#colorlib-aside .colorlib-footer ul li a[title="Credly"]:hover img {
+  filter: invert(48%) sepia(68%) saturate(2645%) hue-rotate(346deg) brightness(102%) contrast(104%);
+  /* Credly Orange */
+}
+
+#colorlib-aside .colorlib-footer ul li a[title="GitHub"]:hover img {
+  filter: invert(24%) sepia(9%) saturate(629%) hue-rotate(179deg) brightness(92%) contrast(88%);
+  /* GitHub Dark */
+}
+
+#colorlib-aside .colorlib-footer ul li a[title="Facebook"]:hover img {
+  filter: invert(23%) sepia(95%) saturate(1728%) hue-rotate(204deg) brightness(96%) contrast(95%);
+  /* Facebook Blue */
+}
+
+#colorlib-aside .colorlib-footer ul li a[title="Instagram"]:hover img {
+  filter: invert(28%) sepia(100%) saturate(1920%) hue-rotate(299deg) brightness(91%) contrast(97%);
+  /* Instagram Purple */
 }
 
 .container-wrap {
@@ -1468,6 +1563,7 @@ body.offcanvas .colorlib-nav-toggle {
 
 .colorlib-social li {
   list-style: none;
+  position: relative;
 }
 
 .colorlib-social li a {
@@ -1475,18 +1571,22 @@ body.offcanvas .colorlib-nav-toggle {
   padding: 10px;
   background: transparent;
   border-radius: 50%;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.colorlib-social li a:hover {
-  background: rgba(44, 152, 240, 0.1);
-  transform: translateY(-3px);
+  transition: background-color 0.5s ease;
 }
 
 .colorlib-social li a img {
   width: 24px;
   height: 24px;
-  filter: none;
+  transition: transform 0.5s ease;
+}
+
+.colorlib-social li a:hover {
+  background-color: black;
+  border-radius: 50%;
+}
+
+.colorlib-social li a:hover img {
+  transform: scale(1.1) rotate(5deg);
 }
 
 @media screen and (max-width: 768px) {
@@ -2025,4 +2125,9 @@ body.offcanvas .colorlib-nav-toggle {
 .colorlib-social li a[title="Instagram"]:hover img {
   filter: invert(28%) sepia(100%) saturate(1920%) hue-rotate(299deg) brightness(91%) contrast(97%);
   /* Instagram Purple */
+}
+
+.js-fullheight {
+  height: 100vh;
+  overflow: hidden;
 }
