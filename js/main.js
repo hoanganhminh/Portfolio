@@ -187,8 +187,7 @@
 				navActive($(this.element).data('section'));
 			}
 		}, {
-			// Giảm offset xuống để trigger sớm hơn
-			offset: '50%'  // Thay đổi từ 150px xuống 50%
+			offset: '50%'
 		});
 
 		$section.waypoint(function(direction) {
@@ -197,9 +196,17 @@
 			}
 		}, {
 			offset: function() { 
-				// Điều chỉnh offset cho hướng up
 				return -$(this.element).height() + $(window).height() * 0.5;
 			}
+		});
+
+		// Thêm sự kiện click cho các liên kết
+		$('a[data-nav-section]').on('click', function(event) {
+			event.preventDefault(); // Ngăn chặn hành vi mặc định
+			var section = $(this).data('nav-section');
+			$('html, body').animate({
+				scrollTop: $('#' + section).offset().top - 70 // Điều chỉnh giá trị này nếu cần
+			}, 500);
 		});
 	};
 
