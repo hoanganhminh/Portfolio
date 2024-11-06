@@ -50,7 +50,7 @@ A clean, beautiful and responsive portfolio website built using HTML, CSS, and J
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/portfolio.git
+   git clone https://github.com/hoanganhminh/portfolio.git
    ```
 
 2. Navigate to the project directory
