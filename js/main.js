@@ -165,6 +165,18 @@
 		    return false;
 		});
 
+		$('#portfolio-btn').click(function(event){
+			var section = $(this).data('nav-section')
+
+				if ( $('[data-section="' + section + '"]').length ) {
+			    	$('html, body').animate({
+			        	scrollTop: $('[data-section="' + section + '"]').offset().top - 55
+			    	}, 500);
+			   }
+
+		    event.preventDefault();
+		    return false;
+		});
 
 	};
 
@@ -200,20 +212,14 @@
 			}
 		});
 
-		// Thêm sự kiện click cho các liên kết
 		$('a[data-nav-section]').on('click', function(event) {
-			event.preventDefault(); // Ngăn chặn hành vi mặc định
+			event.preventDefault();
 			var section = $(this).data('nav-section');
 			$('html, body').animate({
-				scrollTop: $('#' + section).offset().top - 70 // Điều chỉnh giá trị này nếu cần
+				scrollTop: $('#' + section).offset().top - 70
 			}, 500);
 		});
 	};
-
-
-
-
-
 
 	var sliderMain = function() {
 		
@@ -264,9 +270,6 @@
 
 				$("#sticky_item").stick_in_parent();
 			}
-			
-
-			
 
 		});
 
@@ -306,7 +309,6 @@
 		// navActive();
 		navigationSection();
 		// windowScroll();
-
 
 		mobileMenuOutsideClick();
 		sliderMain();
