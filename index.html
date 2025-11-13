@@ -876,6 +876,8 @@
 			const slides = track.querySelectorAll('.cert-slide');
 			const dots = document.querySelectorAll('[data-cert-dot]');
 
+			if (!track || slides.length === 0) return;
+
 			if (index < 0) index = slides.length - 1;
 			if (index >= slides.length) index = 0;
 
@@ -899,8 +901,6 @@
 
 		goToCertSlide(0);
 
-		// --- Active nav in sidebar theo scroll + click ---
-
 		const sections = document.querySelectorAll('main section[id]');
 		const navLinks = document.querySelectorAll('.nav-link');
 
@@ -923,7 +923,6 @@
 			});
 		}
 
-		// Khi click nav, set active luôn (cho cảm giác phản hồi ngay)
 		navLinks.forEach(link => {
 			link.addEventListener('click', () => {
 				const href = link.getAttribute('href');
@@ -934,32 +933,39 @@
 			});
 		});
 
-		// Dùng IntersectionObserver để tự active theo vị trí scroll
-		const observer = new IntersectionObserver(
-			(entries) => {
-				let visibleEntry = null;
+		function updateActiveSection() {
+			const OFFSET = 120;
+			const BOTTOM_EPS = 10;
 
-				entries.forEach(entry => {
-					if (entry.isIntersecting) {
-						if (!visibleEntry || entry.intersectionRatio > visibleEntry.intersectionRatio) {
-							visibleEntry = entry;
-						}
-					}
-				});
+			let currentId = null;
 
-				if (visibleEntry) {
-					setActiveLink(visibleEntry.target.id);
+			sections.forEach(section => {
+				const rect = section.getBoundingClientRect();
+				if (rect.top - OFFSET <= 0) {
+					currentId = section.id;
 				}
-			},
-			{
-				// vùng kích hoạt ở khoảng giữa màn hình
-				root: null,
-				threshold: 0.3,
-				rootMargin: '-20% 0px -40% 0px'
-			}
-		);
+			});
 
-		sections.forEach(section => observer.observe(section));
+			if (!currentId && sections.length > 0) {
+				currentId = sections[0].id;
+			}
+
+			const scrollBottom = window.scrollY + window.innerHeight;
+			const docHeight = document.documentElement.scrollHeight;
+			if (docHeight - scrollBottom <= BOTTOM_EPS && sections.length > 0) {
+				currentId = sections[sections.length - 1].id;
+			}
+
+			if (currentId) {
+				setActiveLink(currentId);
+			}
+		}
+
+		window.addEventListener('scroll', updateActiveSection, { passive: true });
+		window.addEventListener('resize', updateActiveSection);
+		window.addEventListener('load', updateActiveSection);
+
+		document.getElementById('year').textContent = new Date().getFullYear();
 	</script>
 
 </body>
