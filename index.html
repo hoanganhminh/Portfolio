@@ -67,7 +67,7 @@
 	</style>
 </head>
 
-<body class="bg-slate-950 text-slate-100 font-sans">
+<body class="bg-slate-950 text-slate-100 font-sans transition-colors duration-300">
 	<div class="min-h-screen">
 		<div class="mx-auto max-w-6xl px-4 lg:px-6 xl:px-0 flex flex-col lg:flex-row gap-8 lg:gap-10 py-8">
 
@@ -888,7 +888,16 @@
 		</div>
 	</div>
 
+	<div class="fixed bottom-6 right-6 flex flex-col items-end gap-3 z-50">
+		<button id="scroll-to-top" type="button" aria-label="Scroll to top"
+			class="inline-flex items-center justify-center w-12 h-12 rounded-full border border-slate-700 bg-slate-900/80 text-slate-100 shadow-lg shadow-slate-900/30 transition hover:border-sky-400 hover:text-sky-300 opacity-0 pointer-events-none">
+			↑
+		</button>
+	</div>
+
 	<script>
+		const scrollToTopButton = document.getElementById('scroll-to-top');
+
 		// --- Certificates slider ---
 		let currentCertSlide = 0;
 
@@ -985,6 +994,23 @@
 		window.addEventListener('scroll', updateActiveSection, { passive: true });
 		window.addEventListener('resize', updateActiveSection);
 		window.addEventListener('load', updateActiveSection);
+
+		function toggleScrollToTop() {
+			if (window.scrollY > 300) {
+				scrollToTopButton.classList.remove('opacity-0', 'pointer-events-none');
+				scrollToTopButton.classList.add('opacity-100');
+			} else {
+				scrollToTopButton.classList.add('opacity-0', 'pointer-events-none');
+				scrollToTopButton.classList.remove('opacity-100');
+			}
+		}
+
+		scrollToTopButton.addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
+
+		window.addEventListener('scroll', toggleScrollToTop, { passive: true });
+		window.addEventListener('load', toggleScrollToTop);
 
 		const revealItems = Array.from(document.querySelectorAll('.reveal'));
 		const observerOptions = {
