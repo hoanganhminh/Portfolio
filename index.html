@@ -45,6 +45,42 @@
 		};
 	</script>
 	<style>
+		#animated-background {
+			position: fixed;
+			inset: 0;
+			z-index: -1;
+			overflow: hidden;
+			pointer-events: none;
+			background: rgba(2, 6, 23, 0.98);
+		}
+
+		#animated-canvas {
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+
+		.content-panel {
+			background: linear-gradient(150deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.88));
+			border: 1px solid rgba(51, 65, 85, 0.7);
+			box-shadow: 0 20px 60px rgba(2, 6, 23, 0.6);
+			backdrop-filter: blur(6px);
+		}
+
+		.section-card {
+			background: rgba(15, 23, 42, 0.75);
+			border: 1px solid rgba(51, 65, 85, 0.6);
+			border-radius: 1.5rem;
+			padding: 2.5rem;
+			box-shadow: 0 16px 40px rgba(2, 6, 23, 0.45);
+		}
+
+		@media (max-width: 640px) {
+			.section-card {
+				padding: 1.75rem;
+			}
+		}
+
 		.reveal {
 			opacity: 0;
 			transform: translateY(24px);
@@ -68,6 +104,9 @@
 </head>
 
 <body class="bg-slate-950 text-slate-100 font-sans transition-colors duration-300">
+	<div id="animated-background" aria-hidden="true">
+		<canvas id="animated-canvas"></canvas>
+	</div>
 	<div class="min-h-screen">
 		<div class="mx-auto max-w-6xl px-4 lg:px-6 xl:px-0 flex flex-col lg:flex-row gap-8 lg:gap-10 py-8">
 
@@ -1031,6 +1070,180 @@
 		revealItems.forEach(item => {
 			revealObserver.observe(item);
 		});
+
+		const animatedCanvas = document.getElementById('animated-canvas');
+		const canvasContext = animatedCanvas ? animatedCanvas.getContext('2d') : null;
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		let particles = [];
+		let comets = [];
+		let animationFrameId = null;
+		let lastFrameTime = 0;
+		const pointer = { x: 0, y: 0, active: false };
+		const palette = ['56, 189, 248', '129, 140, 248', '34, 211, 238', '14, 165, 233'];
+
+		function resizeCanvas() {
+			if (!animatedCanvas || !canvasContext) return;
+			const { innerWidth, innerHeight, devicePixelRatio } = window;
+			const ratio = Math.min(devicePixelRatio || 1, 2);
+			animatedCanvas.width = innerWidth * ratio;
+			animatedCanvas.height = innerHeight * ratio;
+			animatedCanvas.style.width = `${innerWidth}px`;
+			animatedCanvas.style.height = `${innerHeight}px`;
+			canvasContext.setTransform(ratio, 0, 0, ratio, 0, 0);
+			const targetCount = Math.min(90, Math.floor((innerWidth * innerHeight) / 15000));
+			particles = Array.from({ length: targetCount }, () => createParticle(innerWidth, innerHeight));
+		}
+
+		function createParticle(width, height) {
+			return {
+				x: Math.random() * width,
+				y: Math.random() * height,
+				vx: (Math.random() - 0.5) * 0.25,
+				vy: (Math.random() - 0.5) * 0.25,
+				radius: 1 + Math.random() * 1.8,
+				glow: 0.4 + Math.random() * 0.5,
+				color: palette[Math.floor(Math.random() * palette.length)],
+			};
+		}
+
+		function spawnComet(x, y) {
+			if (!animatedCanvas) return;
+			const angle = Math.random() * Math.PI * 2;
+			comets.push({
+				x,
+				y,
+				vx: Math.cos(angle) * (1.2 + Math.random() * 1.5),
+				vy: Math.sin(angle) * (1.2 + Math.random() * 1.5),
+				life: 1,
+				color: palette[Math.floor(Math.random() * palette.length)],
+			});
+			if (comets.length > 40) {
+				comets = comets.slice(-40);
+			}
+		}
+
+		function drawBackground(time) {
+			if (!animatedCanvas || !canvasContext) return;
+			const width = window.innerWidth;
+			const height = window.innerHeight;
+			canvasContext.fillStyle = 'rgba(2, 6, 23, 0.98)';
+			canvasContext.fillRect(0, 0, width, height);
+		}
+
+		function drawFrame(time) {
+			if (!animatedCanvas || !canvasContext) return;
+			const width = window.innerWidth;
+			const height = window.innerHeight;
+			const delta = time - lastFrameTime;
+			lastFrameTime = time;
+			drawBackground(time);
+
+			canvasContext.save();
+			canvasContext.globalCompositeOperation = 'lighter';
+
+			particles.forEach(particle => {
+				particle.x += particle.vx * delta * 0.04;
+				particle.y += particle.vy * delta * 0.04;
+
+				if (particle.x < -20) particle.x = width + 20;
+				if (particle.x > width + 20) particle.x = -20;
+				if (particle.y < -20) particle.y = height + 20;
+				if (particle.y > height + 20) particle.y = -20;
+
+				if (pointer.active) {
+					const dx = particle.x - pointer.x;
+					const dy = particle.y - pointer.y;
+					const distance = Math.hypot(dx, dy);
+					if (distance > 0 && distance < 160) {
+						const force = (160 - distance) / 160;
+						particle.vx += (dx / distance) * force * 0.02;
+						particle.vy += (dy / distance) * force * 0.02;
+					}
+				}
+			});
+
+			for (let i = 0; i < particles.length; i += 1) {
+				for (let j = i + 1; j < particles.length; j += 1) {
+					const dx = particles[i].x - particles[j].x;
+					const dy = particles[i].y - particles[j].y;
+					const distance = Math.hypot(dx, dy);
+					if (distance < 140) {
+						const alpha = (1 - distance / 140) * 0.35;
+						canvasContext.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+						canvasContext.lineWidth = 1;
+						canvasContext.beginPath();
+						canvasContext.moveTo(particles[i].x, particles[i].y);
+						canvasContext.lineTo(particles[j].x, particles[j].y);
+						canvasContext.stroke();
+					}
+				}
+			}
+
+			particles.forEach(particle => {
+				canvasContext.fillStyle = `rgba(${particle.color}, ${particle.glow})`;
+				canvasContext.beginPath();
+				canvasContext.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+				canvasContext.fill();
+			});
+
+			comets = comets
+				.map(comet => ({
+					...comet,
+					x: comet.x + comet.vx * (delta * 0.05),
+					y: comet.y + comet.vy * (delta * 0.05),
+					life: comet.life - delta * 0.0012,
+				}))
+				.filter(comet => comet.life > 0);
+
+			comets.forEach(comet => {
+				const tailX = comet.x - comet.vx * 12;
+				const tailY = comet.y - comet.vy * 12;
+				canvasContext.strokeStyle = `rgba(${comet.color}, ${comet.life})`;
+				canvasContext.lineWidth = 2;
+				canvasContext.beginPath();
+				canvasContext.moveTo(comet.x, comet.y);
+				canvasContext.lineTo(tailX, tailY);
+				canvasContext.stroke();
+			});
+
+			canvasContext.restore();
+
+			if (!prefersReducedMotion) {
+				animationFrameId = window.requestAnimationFrame(drawFrame);
+			}
+		}
+
+		function startAnimation() {
+			if (!animatedCanvas || !canvasContext) return;
+			cancelAnimationFrame(animationFrameId);
+			lastFrameTime = performance.now();
+			drawFrame(lastFrameTime);
+		}
+
+		window.addEventListener('resize', () => {
+			resizeCanvas();
+			if (prefersReducedMotion) {
+				drawFrame(performance.now());
+			}
+		});
+
+		window.addEventListener('mousemove', event => {
+			pointer.x = event.clientX;
+			pointer.y = event.clientY;
+			pointer.active = true;
+			spawnComet(pointer.x, pointer.y);
+		});
+
+		window.addEventListener('mouseleave', () => {
+			pointer.active = false;
+		});
+
+		resizeCanvas();
+		if (prefersReducedMotion) {
+			drawFrame(performance.now());
+		} else {
+			startAnimation();
+		}
 
 		document.getElementById('year').textContent = new Date().getFullYear();
 	</script>
