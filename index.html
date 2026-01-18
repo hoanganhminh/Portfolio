@@ -44,6 +44,27 @@
 			},
 		};
 	</script>
+	<style>
+		.reveal {
+			opacity: 0;
+			transform: translateY(24px);
+			transition: opacity 0.8s ease, transform 0.8s ease;
+			will-change: opacity, transform;
+		}
+
+		.reveal.is-visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.reveal {
+				opacity: 1;
+				transform: none;
+				transition: none;
+			}
+		}
+	</style>
 </head>
 
 <body class="bg-slate-950 text-slate-100 font-sans">
@@ -174,7 +195,7 @@
 
 				<!-- Hero -->
 				<section id="home"
-					class="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900 to-sky-900/40 scroll-mt-24 lg:scroll-mt-32">
+					class="reveal relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900 to-sky-900/40 scroll-mt-24 lg:scroll-mt-32">
 					<div class="absolute inset-0 opacity-30">
 						<img src="images/bg-minh.jpeg" alt="Background"
 							class="w-full h-full object-cover mix-blend-soft-light" />
@@ -226,7 +247,7 @@
 				</section>
 
 				<!-- About -->
-				<section id="about" class="space-y-10 scroll-mt-4 lg:scroll-mt-8">
+				<section id="about" class="reveal space-y-10 scroll-mt-4 lg:scroll-mt-8">
 					<header class="space-y-2">
 						<p class="text-xs uppercase tracking-[0.25em] text-slate-500">About Me</p>
 						<h2 class="text-2xl sm:text-3xl font-heading font-bold">Who Am I?</h2>
@@ -316,7 +337,7 @@
 				</section>
 
 				<!-- Certificates -->
-				<section id="certificates" class="space-y-10 scroll-mt-4 lg:scroll-mt-8">
+				<section id="certificates" class="reveal space-y-10 scroll-mt-4 lg:scroll-mt-8">
 					<header class="space-y-2 flex items-center justify-between">
 						<div>
 							<p class="text-xs uppercase tracking-[0.25em] text-slate-500">What I've achieved</p>
@@ -508,7 +529,7 @@
 
 
 				<!-- Skills -->
-				<section id="skills" class="space-y-10 scroll-mt-4 lg:scroll-mt-8">
+				<section id="skills" class="reveal space-y-10 scroll-mt-4 lg:scroll-mt-8">
 					<header class="space-y-2">
 						<p class="text-xs uppercase tracking-[0.25em] text-slate-500">My Specialty</p>
 						<h2 class="text-2xl sm:text-3xl font-heading font-bold">My Skills</h2>
@@ -601,7 +622,7 @@
 				</section>
 
 				<!-- Education -->
-				<section id="education" class="space-y-10 scroll-mt-4 lg:scroll-mt-8">
+				<section id="education" class="reveal space-y-10 scroll-mt-4 lg:scroll-mt-8">
 					<header class="space-y-2">
 						<p class="text-xs uppercase tracking-[0.25em] text-slate-500">Education</p>
 						<h2 class="text-2xl sm:text-3xl font-heading font-bold">My Education</h2>
@@ -636,7 +657,7 @@
 				</section>
 
 				<!-- Experience -->
-				<section id="experience" class="space-y-10 scroll-mt-4 lg:scroll-mt-8">
+				<section id="experience" class="reveal space-y-10 scroll-mt-4 lg:scroll-mt-8">
 					<header class="space-y-2">
 						<p class="text-xs uppercase tracking-[0.25em] text-slate-500">Experience</p>
 						<h2 class="text-2xl sm:text-3xl font-heading font-bold">Work Experience</h2>
@@ -794,7 +815,7 @@
 				</section>
 
 				<!-- Contact -->
-				<section id="contact" class="space-y-10 scroll-mt-4 lg:scroll-mt-8">
+				<section id="contact" class="reveal space-y-10 scroll-mt-4 lg:scroll-mt-8">
 					<header class="space-y-2">
 						<p class="text-xs uppercase tracking-[0.25em] text-slate-500">Get in Touch</p>
 						<h2 class="text-2xl sm:text-3xl font-heading font-bold">Contact</h2>
@@ -859,7 +880,7 @@
 					</div>
 				</section>
 
-				<footer class="pb-4 text-xs text-slate-500 text-center">
+				<footer class="reveal pb-4 text-xs text-slate-500 text-center">
 					© <span id="year"></span> Hoang Anh Minh. All rights reserved.
 				</footer>
 
@@ -964,6 +985,26 @@
 		window.addEventListener('scroll', updateActiveSection, { passive: true });
 		window.addEventListener('resize', updateActiveSection);
 		window.addEventListener('load', updateActiveSection);
+
+		const revealItems = Array.from(document.querySelectorAll('.reveal'));
+		const observerOptions = {
+			root: null,
+			threshold: 0.2,
+			rootMargin: '0px 0px -10% 0px',
+		};
+
+		const revealObserver = new IntersectionObserver((entries, observer) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('is-visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, observerOptions);
+
+		revealItems.forEach(item => {
+			revealObserver.observe(item);
+		});
 
 		document.getElementById('year').textContent = new Date().getFullYear();
 	</script>
