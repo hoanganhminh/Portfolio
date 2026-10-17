@@ -66,13 +66,13 @@ export const AboutSection: React.FC = () => {
             <MagicCard className="p-6 sm:p-7" gradientColor="#38bdf8" gradientOpacity={0.12}>
               <div className="space-y-3.5 text-slate-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
                 <p className="text-base sm:text-lg font-medium text-slate-900 dark:text-slate-100">
-                  Hi, I'm <strong className="text-sky-500 dark:text-sky-400">Hoàng Anh Minh</strong>, a Backend Software Engineer currently working at <span className="font-semibold text-slate-900 dark:text-slate-100">CMC Global</span>.
+                  Hi, I'm <strong className="text-sky-500 dark:text-sky-400">Hoàng Anh Minh</strong>, a Backend &amp; Full Stack Software Engineer currently contributing at <span className="font-semibold text-slate-900 dark:text-slate-100">CMC Global</span> and <span className="font-semibold text-slate-900 dark:text-slate-100">Omifit</span>.
                 </p>
                 <p>
-                  With 4+ years of professional development experience, I specialize in architecting and maintaining mission-critical backend systems using <strong className="text-slate-900 dark:text-slate-100 font-semibold">C#</strong> within the <strong className="text-slate-900 dark:text-slate-100 font-semibold">.NET ecosystem</strong>.
+                  With 4+ years of professional engineering experience, I specialize in architecting and maintaining mission-critical backend systems using <strong className="text-slate-900 dark:text-slate-100 font-semibold">C#</strong> within the <strong className="text-slate-900 dark:text-slate-100 font-semibold">.NET ecosystem</strong> alongside modern web architectures.
                 </p>
                 <p>
-                  My work spans healthcare clinical systems (HIS), enterprise Single Sign-On (SSO) identity federation, and cross-border production support. I prioritize clean domain architecture, query optimization, and building resilient APIs that scale under high concurrency.
+                  My work spans enterprise construction management, Japanese financial platforms, healthcare clinical systems (HIS), fitness ecosystems, and enterprise Single Sign-On (SSO) identity federation. I prioritize clean domain architecture, query optimization, and building resilient APIs that scale under high concurrency.
                 </p>
               </div>
             </MagicCard>

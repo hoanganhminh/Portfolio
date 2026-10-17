@@ -208,7 +208,7 @@ export const ContactSection: React.FC = () => {
                       key={s.name}
                       href={s.url}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className={`inline-flex items-center justify-center gap-2 px-3.5 py-3 rounded-xl bg-slate-100/90 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300 transition-all duration-200 hover:-translate-y-0.5 active:scale-95 ${s.hoverClass}`}
                     >
                       <Icon className="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" />

@@ -67,12 +67,16 @@ export const HeroSection: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed"
             >
-              Specializing in building robust, high-performance distributed backend services on the{' '}
-              <strong className="text-sky-400 font-semibold">.NET ecosystem</strong>. Currently working at{' '}
+              Specializing in building robust, high-performance backend and full-stack solutions on the{' '}
+              <strong className="text-sky-400 font-semibold">.NET ecosystem</strong>. Currently contributing at{' '}
               <span className="text-slate-900 dark:text-slate-100 font-semibold">
                 CMC Global
+              </span>{' '}
+              and{' '}
+              <span className="text-slate-900 dark:text-slate-100 font-semibold">
+                Omifit
               </span>
-              , with extensive engineering experience at{' '}
+              , with foundational engineering experience at{' '}
               <span className="text-slate-900 dark:text-slate-100 font-semibold">
                 FPT Software
               </span>

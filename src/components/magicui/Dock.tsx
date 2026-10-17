@@ -63,8 +63,15 @@ const DockItem: React.FC<DockItemProps> = ({
   );
 
   if (href) {
+    const isExternal = href.startsWith('http');
     return (
-      <a href={href} className="inline-block" aria-label={label}>
+      <a
+        href={href}
+        className="inline-block"
+        aria-label={label}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
+      >
         {content}
       </a>
     );

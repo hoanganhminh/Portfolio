@@ -162,7 +162,7 @@ export const ProjectsSection: React.FC = () => {
                     <a
                       href={project.link}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-500 dark:text-rose-400 hover:text-rose-600 dark:hover:text-rose-300 transition-colors pt-1"
                     >
                       <span>{project.linkText}</span>

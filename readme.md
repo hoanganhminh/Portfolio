@@ -1,5 +1,13 @@
 # 3D Interactive Portfolio Engine
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-hoanganhminh.vercel.app-00f2fe?style=for-the-badge&logo=vercel&logoColor=white)](https://hoanganhminh.vercel.app/)
+[![React 19](https://img.shields.io/badge/React-19.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Three.js](https://img.shields.io/badge/Three.js-WebGL_2.0-black?style=for-the-badge&logo=threedotjs&logoColor=white)](https://threejs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+
+> **Live Production Preview**: [https://hoanganhminh.vercel.app/](https://hoanganhminh.vercel.app/)
+
 A high-performance, responsive portfolio web application engineered with **React 19**, **Three.js WebGL**, **Custom GLSL Shaders**, **Tailwind CSS v4**, and **Lenis momentum scrolling**.
 
 Designed with a modern cybernetic aesthetic, physical glassmorphism, hardware-accelerated animations, and zero-layout-thrashing architecture.
@@ -34,6 +42,7 @@ Designed with a modern cybernetic aesthetic, physical glassmorphism, hardware-ac
 
 | Domain | Technology | Version / Specification |
 | :--- | :--- | :--- |
+| **Live Production** | Vercel Edge Network | [hoanganhminh.vercel.app](https://hoanganhminh.vercel.app/) |
 | **Runtime & Core** | React | 19.x |
 | **Language** | TypeScript | 5.x / Strict Mode |
 | **Build Engine** | Vite | 8.x |
@@ -143,6 +152,8 @@ The application is configured for deployment on **Vercel** with automatic SPA re
   ]
 }
 ```
+
+Live demo is deployed and maintained at: **[https://hoanganhminh.vercel.app/](https://hoanganhminh.vercel.app/)**
 
 Pushing commits to the `main` branch will automatically trigger builds on connected Vercel environments.
 
